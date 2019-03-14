@@ -1,14 +1,17 @@
 # volcanoes
 
-A Clojure library designed to ... well, that part is up to you.
+Code to accompany the [Repl-Driven Development
+course][course], part of [PurelyFunctional.tv][pf.tv].
 
-## Usage
-
-FIXME
+[course]: https://purelyfunctional.tv/courses/repl-driven-development-in-clojure/
+[pf.tv]: https://purelyfunctional.tv/
 
 ## License
 
-Copyright © 2019 FIXME
+[![CC0](http://i.creativecommons.org/p/zero/1.0/88x31.png)](http://creativecommons.org/publicdomain/zero/1.0/)
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+To the extent possible under law, the person who associated CC0 with
+this work has waived all copyright and related or neighboring rights
+to the code in this repository.
+
+See the `LICENSE` file for more information.
