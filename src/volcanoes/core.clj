@@ -26,16 +26,31 @@
            (zipmap header-line volcano-line))
       volcano-lines)))
 
+(defn parse-eruption-date [date]
+  (if (= "Unknown" date)
+    nil
+    (let [[_ y e] (re-matches #"(\d+) (.+)" date)]
+      (cond
+        (= e "BCE")
+        (- (Integer/parseInt y))
+        (= e "CE")
+        (Integer/parseInt y)
+        :else
+        (throw (ex-info "Could not parse year." {:year date}))))))
+
 (defn parse-numbers [volcano]
   (-> volcano
     (update :elevation-meters #(Integer/parseInt %))
     (update :longitude #(Double/parseDouble %))
-    (update :latitude #(Double/parseDouble %))))
+    (update :latitude #(Double/parseDouble %))
+    (assoc :last-eruption-parsed (parse-eruption-date (:last-known-eruption volcano)))))
 
 (def volcanoes-parsed
-  (map parse-numbers volcano-records))
+  (mapv parse-numbers volcano-records))
 
 (def types (set (map :primary-volcano-type volcano-records)))
+
+#_(println "All done!")
 
 (comment
 
@@ -45,6 +60,6 @@
     (clojure.pprint/pprint volcano))
 
   (let [volcano (first (filter #(= "221291" (:volcano-number %)) volcanoes-parsed))]
-    (clojure.pprint/pprint volcano))
+    (clojure.pprint/pprint volcano)))
 
-  )
+
