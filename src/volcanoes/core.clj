@@ -2,6 +2,16 @@
   (:require [clojure.data.csv :as csv]
             [clojure.java.io  :as io]))
 
+;; Main ways to execute code in your files
+
+;; 1. Whole file
+;; 2. Top-level form (expression)
+;; 3. Single expression
+
+;; 4. REPL Prompt
+
+;; Guideline
+
 (def csv-lines
   (with-open [csv (io/reader "/Users/eric/Desktop/GVP_Volcano_List_Holocene.csv")]
     (doall
@@ -60,6 +70,8 @@
     (clojure.pprint/pprint volcano))
 
   (let [volcano (first (filter #(= "221291" (:volcano-number %)) volcanoes-parsed))]
-    (clojure.pprint/pprint volcano)))
+    (clojure.pprint/pprint volcano))
+
+  )
 
 
