@@ -56,9 +56,7 @@
 
 (defn transform-header [header]
   (if (= "Elevation (m)" header)
-    (do
-      (throw (ex-info "Bug!" {}))
-     :elevation-meters)
+    :elevation-meters
     (-> header
         (clojure.string/replace #"L" "l")
         clojure.string/lower-case
