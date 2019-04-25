@@ -55,7 +55,6 @@
 
 
 (defn transform-header [header]
-  (def *h header)
   (if (= "Elevation (m)" header)
     (do
       (throw (ex-info "Bug!" {}))
@@ -80,7 +79,6 @@
 
 
 (defn parse-eruption-date [date]
-  (def *d date)
   (if (= "Unknown" date)
     nil
     (let [[_ y e] (re-matches #"(\d+)[\s]+(.+)" date)]
