@@ -1,7 +1,8 @@
 (ns volcanoes.core
   (:require [clojure.data.csv :as csv]
             [clojure.java.io  :as io]
-            [clojure.string   :as str]))
+            [clojure.string   :as str]
+            [volcanoes.protocol :as p]))
 
 ;; Main ways to execute code in your files
 
@@ -88,10 +89,11 @@
         :else
         (throw (ex-info "Could not parse year." {:year date}))))))
 
+
 (defn slash->set [s]
   (set (map str/trim (str/split s #"/"))))
 
-(defn parse-numbers [volcano]
+(defn parse-volcano-numbers [volcano]
   (-> volcano
       (update :elevation-meters #(Integer/parseInt %))
       (update :longitude #(Double/parseDouble %))
@@ -101,11 +103,49 @@
       (update :dominant-rock-type slash->set)))
 
 (def volcanoes-parsed
-  (mapv parse-numbers volcano-records))
+  (mapv parse-volcano-numbers volcano-records))
 
 (def types (set (map :primary-volcano-type volcano-records)))
 
-#_(println "All done!")
+;; Demonstrations of problems reloading
+
+(defrecord Mountain [name]
+  p/Volcano
+  (erupt [m]
+    (println name "is erupting!")))
+
+
+
+(defmulti hemisphere (fn [volcano]
+                       [(pos? (:longitude volcano))
+                        (pos? (:latitude  volcano))]))
+
+(defmethod hemisphere [true true]
+  [v]
+  [:eastern :northern])
+
+(defmethod hemisphere [false false]
+  [v]
+  [:western :southern])
+
+(defn greet []
+  (println "Hello, Eric!"))
+
+(def hello-world #'greet)
+
+(defn plus2 [x]
+  (+ x 2))
+
+(defn times3 [x]
+  (* x 3))
+
+(def x+2*3 (comp #'times3 #'plus2))
+
+(fn [] (greet))
+#'greet
+(var greet)
+
+#_ (println "All done!")
 
 (comment
 
@@ -121,5 +161,6 @@
 
   (parse-eruption-date "2014 CE")
   (parse-eruption-date "187  BCE"))
+
 
 

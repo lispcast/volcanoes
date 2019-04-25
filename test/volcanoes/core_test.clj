@@ -6,3 +6,6 @@
   (is (= :elevation-meters (transform-header "Elevation (m)")))
   (is (= :hello (transform-header "HEllo")))
   (is (= :ruby-tuesday (transform-header "Ruby Tuesday"))))
+
+(deftest protocol-test
+  (is (nil? (volcanoes.protocol/erupt (->Mountain "Everest")))))
