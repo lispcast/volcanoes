@@ -49,10 +49,29 @@
 ;; 2. Set up env using def
 ;; 3. Inside->out, outside->in
 
-(def csv-lines
+(defonce csv-lines
   (with-open [csv (io/reader "/Users/eric/Desktop/GVP_Volcano_List_Holocene.csv")]
     (doall
      (csv/read-csv csv))))
+
+(defonce state (atom nil))
+
+(defn reset-state []
+  (reset! state nil))
+
+(comment (reset-state))
+
+(defn setup []
+  )
+
+(defn teardown []
+  )
+
+(defn reset []
+  (teardown)
+  (setup))
+
+
 
 
 (defn transform-header [header]
@@ -163,4 +182,4 @@
   (parse-eruption-date "187  BCE"))
 
 
-
+(reset)
