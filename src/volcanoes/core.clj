@@ -49,6 +49,17 @@
 ;; 2. Set up env using def
 ;; 3. Inside->out, outside->in
 
+;; 5 ways to print
+;; 1. println
+;; 2. prn
+;; 3. clojure.pprint/pprint
+;; 4. clojure.pprint/print-table
+;; 5. doseq print
+
+;; Controlling printing
+;; 1. *print-length*
+;; 2. *print-level*
+
 (defonce csv-lines
   (with-open [csv (io/reader "/Users/eric/Desktop/GVP_Volcano_List_Holocene.csv")]
     (doall
