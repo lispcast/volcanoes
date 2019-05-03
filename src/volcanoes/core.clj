@@ -60,6 +60,15 @@
 ;; 1. *print-length*
 ;; 2. *print-level*
 
+;; Playing with values
+;; 1. Result history
+;;  *1, *2, *3, *e
+;; 2. def values you want to save
+;; 3. Ask for what you need
+;;  a. omit
+;;  b. summarize
+;;  c. metadata
+
 (defonce csv-lines
   (with-open [csv (io/reader "/Users/eric/Desktop/GVP_Volcano_List_Holocene.csv")]
     (doall
