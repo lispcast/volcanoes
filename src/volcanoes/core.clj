@@ -70,7 +70,7 @@
 ;;  c. metadata
 
 (defonce csv-lines
-  (with-open [csv (io/reader "/Users/eric/Desktop/GVP_Volcano_List_Holocene.csv")]
+  (with-open [csv (io/reader (io/resource "GVP_Volcano_List_Holocene.csv"))]
     (doall
      (csv/read-csv csv))))
 
